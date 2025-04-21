@@ -1,11 +1,6 @@
 import EditForm from "@/app/component/editForm/editForm";
-import Header from "@/app/component/header/header";
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ postId: string }>;
-}) {
+export default async function Page({ params }: { params: Promise<{ postId: string }> }) {
   const resolvedParams = await params;
   const postId = resolvedParams.postId;
 
@@ -31,10 +26,5 @@ export default async function Page({
   const fileListData = data.fileList;
 
   // 클라이언트 컴포넌트에 데이터 전달
-  return;
-  <>
-    <Header active={"write"} />
-    <EditForm postData={postData} fileListData={fileListData} postId={postId} />
-    ;
-  </>;
+  return <EditForm postData={postData} fileListData={fileListData} postId={postId} />;
 }

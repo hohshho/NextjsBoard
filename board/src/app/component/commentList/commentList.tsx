@@ -4,17 +4,6 @@ import { formatDate } from "@/app/util/dateUtil";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-interface Comment {
-  id: number;
-  content: string;
-  createdDate: string;
-}
-
-interface CommentListProps {
-  commentList: Comment[];
-  postId: number;
-}
-
 export default function CommentList({ commentList, postId }: CommentListProps) {
   const router = useRouter();
   const [isDeleting, setIsDeleting] = useState(false);
@@ -40,13 +29,8 @@ export default function CommentList({ commentList, postId }: CommentListProps) {
         }),
       });
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        // 삭제 성공 시 페이지 새로고침
+      if (response.ok) {
         router.refresh();
-      } else {
-        throw new Error(data.message || "댓글 삭제 실패");
       }
     } catch (error) {
       console.error("댓글 삭제 오류:", error);

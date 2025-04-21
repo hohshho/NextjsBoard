@@ -38,6 +38,7 @@ export default async function Page({ searchParams }: SearchPageProps) {
             <span className="fs-4">EGIS</span>
           </Link>
 
+          {/* 검색 폼 */}
           <Searchbar initialKeyword={keyword} />
 
           <ul className="nav nav-pills">

@@ -2,6 +2,8 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Header from "@/app/component/header/header";
+import { convertToDate } from "@/app/util/dateUtil";
 
 export default function EditForm({
   postData,
@@ -102,9 +104,11 @@ export default function EditForm({
 
   return (
     <>
+      <Header active={"write"} />
       <div className="container mt-5">
         <h2 className="mb-4">게시글 수정</h2>
 
+        {/* 나머지 UI 코드는 동일 */}
         <div className="mb-4">
           <form className="mb-3">
             <div className="input-group">

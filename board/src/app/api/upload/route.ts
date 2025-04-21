@@ -21,9 +21,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // 새 FormData 생성 (Spring 서버로 전달)
     const serverFormData = new FormData();
     serverFormData.append("uploadFile", uploadFile);
 
+    // Spring 서버로 요청 전송
     const response = await fetch("http://localhost:8300/fileUpload", {
       method: "POST",
       body: serverFormData,
@@ -40,6 +42,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // 성공 응답 처리
     const responseData = await response.json();
     
     return NextResponse.json({

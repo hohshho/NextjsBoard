@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Header from "../component/header/header";
-import { formatDate } from "../util/dateUtil";
 
 export default async function Page({ searchParams }: HomeProps) {
   const params = await searchParams;
@@ -13,6 +12,17 @@ export default async function Page({ searchParams }: HomeProps) {
   );
   // 응답 본문을 JSON으로 파싱
   const boardPage = await response.json();
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleString("ko-KR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
 
   return (
     <>
