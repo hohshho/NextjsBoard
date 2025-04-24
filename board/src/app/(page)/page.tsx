@@ -1,32 +1,22 @@
 import Link from "next/link";
 import Header from "../component/header/header";
+import BoardList from "../component/BoardList/boardList";
 
 export default async function Page({ searchParams }: HomeProps) {
   const params = await searchParams;
-  
+
   const page = params.page ? parseInt(params.page) : "";
   const size = params.size ? parseInt(params.size) : "";
-  
+
   const response = await fetch(
     `http://localhost:8300/api/list?page=${page}&size=${size}`
   );
   // 응답 본문을 JSON으로 파싱
   const boardPage = await response.json();
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleString("ko-KR", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
-
   return (
     <>
-      <Header active={"list"}/>
+      <Header />
 
       <div className="container mt-5">
         <h2 className="mb-4">게시판</h2>
@@ -42,16 +32,7 @@ export default async function Page({ searchParams }: HomeProps) {
             </tr>
           </thead>
           <tbody>
-            {boardPage.content.map((post: PostData) => (
-              <tr key={post.id}>
-                <th scope="row">{post.id}</th>
-                <td>
-                  <a href={`/detail?id=${post.id}`}>{post.title}</a>
-                </td>
-                <td>{post.view_count}</td>
-                <td>{formatDate(post.created_date)}</td>
-              </tr>
-            ))}
+            <BoardList boardPage={boardPage} />
           </tbody>
         </table>
 
@@ -72,7 +53,7 @@ export default async function Page({ searchParams }: HomeProps) {
               </li>
             )}
             {Array.from({ length: boardPage.totalPages }, (_, i) => i + 1).map(
-              (i) => (
+              i => (
                 <li
                   key={i}
                   className={`page-item ${

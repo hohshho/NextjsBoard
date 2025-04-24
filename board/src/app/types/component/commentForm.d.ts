@@ -1,3 +1,3 @@
 interface CommentFormProps {
-    postId: string | number;
-  }
+  postId: string | number;
+}

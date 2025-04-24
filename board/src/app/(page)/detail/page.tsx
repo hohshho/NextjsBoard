@@ -8,13 +8,11 @@ export default async function Page({ searchParams }: DetailProps) {
   const { id } = await searchParams;
 
   const response = await fetch(`http://localhost:8300/api/detail?id=${id}`);
-  // TODO: 응답도 전부 typescript로 바꿔야 함
-  // TODO: 구조분해할당으로 수정
   const content = await response.json();
 
   return (
     <>
-      <Header active={"list"}/>
+      <Header />
 
       <div className="container mt-5">
         <h2 className="mb-4">게시글 상세보기</h2>

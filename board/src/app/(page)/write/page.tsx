@@ -95,7 +95,7 @@ export default function Page() {
 
   return (
     <>
-      <Header active={"write"}/>
+      <Header />
       <div className="container mt-5">
         <h2 className="mb-4">새 글 작성</h2>
 

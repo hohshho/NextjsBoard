@@ -3,7 +3,6 @@
 
 import { useRef, useState } from "react";
 import Header from "@/app/component/header/header";
-import { convertToDate } from "@/app/util/dateUtil";
 
 export default function EditForm({
   postData,
@@ -104,7 +103,7 @@ export default function EditForm({
 
   return (
     <>
-      <Header active={"write"} />
+      <Header />
       <div className="container mt-5">
         <h2 className="mb-4">게시글 수정</h2>
 
