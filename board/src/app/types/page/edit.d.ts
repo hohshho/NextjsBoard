@@ -22,3 +22,15 @@ interface FileListData {
   fileSize: number;
   uploadedDate: number[];
 }
+
+interface EditFormProps {
+  postData: PostData;
+  fileListData: FileListData[];
+  postId: string;
+}
+
+interface PageParams {
+  params: {
+    postId: string;
+  };
+}

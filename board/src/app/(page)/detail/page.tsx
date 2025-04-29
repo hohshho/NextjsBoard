@@ -1,14 +1,17 @@
-import CommentForm from "@/app/component/commentForm/commentForm";
-import CommentList from "@/app/component/commentList/commentList";
-import Header from "@/app/component/header/header";
+import CommentForm from "@/app/(page)/detail/_fragments/CommentForm/CommentForm";
+import CommentList from "@/app/(page)/detail/_fragments/CommentList/CommentList";
+import Header from "@/app/component/Header/Header";
 import { formatDate } from "@/app/util/dateUtil";
+import { serverGet } from "@/app/util/serverFetch";
 import Link from "next/link";
 
 export default async function Page({ searchParams }: DetailProps) {
   const { id } = await searchParams;
 
-  const response = await fetch(`http://localhost:8300/api/detail?id=${id}`);
-  const content = await response.json();
+  const { data: content, error } = await serverGet<any>(
+    "http://localhost:8300/api/detail",
+    { id }
+  );
 
   return (
     <>
@@ -61,7 +64,6 @@ export default async function Page({ searchParams }: DetailProps) {
 
         <CommentForm postId={content.post.id} />
 
-        {/* 댓글 목록 */}
         <CommentList
           commentList={content.commentList}
           postId={content.post.id}

@@ -23,3 +23,7 @@ interface BoardPage {
   totalPages: number;
   pageSize: number;
 }
+
+interface BoardListProps {
+  boardPage: BoardPage;
+}

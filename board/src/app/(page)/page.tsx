@@ -1,6 +1,8 @@
 import Link from "next/link";
-import Header from "../component/header/header";
-import BoardList from "../component/BoardList/boardList";
+import Header from "../component/Header/Header";
+import BoardList from "./_fragments/BoardList/BoardList";
+import { useFetch } from "../hooks/useFetch";
+import { serverGet } from "../util/serverFetch";
 
 export default async function Page({ searchParams }: HomeProps) {
   const params = await searchParams;
@@ -8,11 +10,10 @@ export default async function Page({ searchParams }: HomeProps) {
   const page = params.page ? parseInt(params.page) : "";
   const size = params.size ? parseInt(params.size) : "";
 
-  const response = await fetch(
-    `http://localhost:8300/api/list?page=${page}&size=${size}`
+  const { data: boardPage, error } = await serverGet<any>(
+    "http://localhost:8300/api/list",
+    { page: page, size: size }
   );
-  // 응답 본문을 JSON으로 파싱
-  const boardPage = await response.json();
 
   return (
     <>

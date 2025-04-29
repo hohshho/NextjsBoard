@@ -1,5 +1,7 @@
 import Link from "next/link";
-import Searchbar from "../../component/searchbar/searchbar";
+import Searchbar from "../../component/Searchbar/Searchbar";
+import { formatDate } from "@/app/util/dateUtil";
+import { serverGet } from "@/app/util/serverFetch";
 
 export default async function Page({ searchParams }: SearchPageProps) {
   // searchParams를 await하여 실제 값에 접근
@@ -9,23 +11,10 @@ export default async function Page({ searchParams }: SearchPageProps) {
   const keyword = params.keyword || "";
   
   // 검색 API 호출 (page와 size 파라미터 제외)
-  const apiUrl = `http://localhost:8300/api/search?keyword=${encodeURIComponent(keyword)}`;
-    
-  const response = await fetch(apiUrl);
-  
-  // 응답 본문을 JSON으로 파싱
-  const boardPage = await response.json();
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleString("ko-KR", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
+  const { data: boardPage, error } = await serverGet<any>(
+    "http://localhost:8300/api/search",
+    { keyword }
+  );
 
   return (
     <>
@@ -39,7 +28,7 @@ export default async function Page({ searchParams }: SearchPageProps) {
           </Link>
 
           {/* 검색 폼 */}
-          <Searchbar initialKeyword={keyword} />
+          <Searchbar />
 
           <ul className="nav nav-pills">
             <li className="nav-item">

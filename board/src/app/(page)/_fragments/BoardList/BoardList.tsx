@@ -4,11 +4,6 @@ import Link from "next/link";
 import { useCurrentPageStore } from "@/app/store/useCurrentPageStore";
 import { formatDate } from "@/app/util/dateUtil";
 
-// props 타입 정의
-interface BoardListProps {
-  boardPage: BoardPage;
-}
-
 // 구조분해를 통해 props 받기
 export default function BoardList({ boardPage }: BoardListProps) {
   const { detail } = useCurrentPageStore();

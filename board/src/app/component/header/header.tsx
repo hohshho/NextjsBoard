@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Searchbar from "../searchbar/searchbar";
+import Searchbar from "../Searchbar/Searchbar";
 import { useCurrentPageStore } from '../../store/useCurrentPageStore';
 
 export default function Header() {

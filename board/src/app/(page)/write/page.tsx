@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import Header from "@/app/component/header/header";
+import Header from "@/app/component/Header/Header";
 
 export default function Page() {
   const [title, setTitle] = useState<string>("");
